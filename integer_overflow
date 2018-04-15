@@ -1,0 +1,6 @@
+判断一个形式为x=a*10+b（b的绝对值小于10）的整数是否溢出，正确的方法是判断x/10（整数除法）是否等于a。如果x/10！=a，则有溢出；反之，无溢出。
+原因如下：
+首先x为一个有符号整数，即integer_min<=x<=integer_max,所以integer_min/10<=x/10<=integer_max/10。
+假设x/10=a,则integer_min/10<=a<=integer_max/10。由于|b|<10，则只有当a=integer_max/10或integer_min/10时x才可能发生溢出。
+对于32位有符号整数，INT_MAX = 2147483647 and INT_MIN = -2147483648。当a=integer_max/10=214748364，只有当b=8或9时，溢出才会发生。
+但此时x会变成负数，x/10！=a，与之前x/10=a的假设矛盾，当a=integer_min/10时同理。故x/10=a时不可能发生溢出，x / 10 != a <==> overflow
